@@ -1,0 +1,13 @@
+services:
+  fastapi:
+    build: .
+    restart: unless-stopped
+    environment:
+      DATA_DIR: /data
+      RETENTION_SECONDS: "3600"
+      TASK_TIMEOUT_SECONDS: "60"
+    ports:
+      - "0.0.0.0:18081:8000"
+    volumes:
+      - ./data:/data
+    command: ["./start.sh"]
