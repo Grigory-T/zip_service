@@ -14,6 +14,16 @@ Task types `1` and `2` are dummy implementations for now: both sleep for 1 secon
 
 ## Run
 
+Prepare the host data directory first:
+
+```bash
+./prepare-data-dir.sh
+```
+
+This matters for the `./data:/data` bind mount. If `data/` does not exist, Docker can create it as `root:root`, and the non-root container user will not be able to write uploaded jobs.
+
+Then start the service:
+
 ```bash
 docker compose up --build
 ```
@@ -31,3 +41,9 @@ Runtime task data is stored in:
 ```
 
 `data/` is intentionally ignored by git.
+
+If permissions are broken after moving or recreating the folder, run:
+
+```bash
+./prepare-data-dir.sh
+```
