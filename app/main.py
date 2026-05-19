@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 logger = logging.getLogger("sandbox-python-server")
 API_BEARER_TOKEN = os.environ.get("API_BEARER_TOKEN", "")
 
-app = FastAPI(title="Sandbox Python Server")
+app = FastAPI(title="Sandbox Python Server", docs_url=None, redoc_url=None, openapi_url=None)
 
 
 @app.on_event("startup")
