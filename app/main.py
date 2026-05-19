@@ -1,7 +1,7 @@
 import logging
 import os
 
-from fastapi import Depends, File, Form, Header, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 
 from .state import (
