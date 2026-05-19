@@ -12,6 +12,9 @@ if [ -n "${TLS_CERT_FILE:-}" ] || [ -n "${TLS_KEY_FILE:-}" ]; then
   fi
   uvicorn_args="$uvicorn_args --ssl-certfile $TLS_CERT_FILE --ssl-keyfile $TLS_KEY_FILE"
 fi
+if [ -n "${TLS_CLIENT_CA_FILE:-}" ]; then
+  uvicorn_args="$uvicorn_args --ssl-ca-certs $TLS_CLIENT_CA_FILE --ssl-cert-reqs 2"
+fi
 
 uvicorn app.main:app $uvicorn_args &
 uvicorn_pid=$!

@@ -33,9 +33,10 @@ Create or copy TLS files for Uvicorn:
 ```text
 ./secrets/tls/server.crt
 ./secrets/tls/server.key
+./secrets/tls/ca.crt
 ```
 
-The certificate must be trusted by the C# backend host. In the current LAN deployment, Firebat trusts the local CA that signs this server certificate.
+The server certificate must be trusted by the C# backend host. `ca.crt` is also used by Uvicorn to verify the backend's client certificate for mTLS.
 
 Then start the service:
 
@@ -50,6 +51,7 @@ https://0.0.0.0:18081
 ```
 
 The service uses HTTPS when `TLS_CERT_FILE` and `TLS_KEY_FILE` are configured by Compose.
+It requires a client certificate when `TLS_CLIENT_CA_FILE` is configured.
 
 Runtime task data is stored in:
 

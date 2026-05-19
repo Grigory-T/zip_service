@@ -10,6 +10,7 @@ services:
       TASK_TIMEOUT_SECONDS: "60"
       TLS_CERT_FILE: /run/sandbox-secrets/tls/server.crt
       TLS_KEY_FILE: /run/sandbox-secrets/tls/server.key
+      TLS_CLIENT_CA_FILE: /run/sandbox-secrets/tls/ca.crt
     ports:
       - "0.0.0.0:18081:8000"
     volumes:
