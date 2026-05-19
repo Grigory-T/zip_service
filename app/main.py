@@ -75,7 +75,7 @@ async def create_job(
     return {"task_id": task_id, "job_id": task_id, "task_type": task_type, "status": "queued"}
 
 
-@app.get("/jobs/{task_id}")
+@app.get("/jobs/{task_id}", response_model=None)
 def get_job(task_id: str, _auth: None = Depends(require_bearer_token)) -> dict[str, object] | FileResponse:
     state = read_state(task_id)
     if state is None:
