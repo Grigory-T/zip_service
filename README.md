@@ -22,6 +22,21 @@ Prepare the host data directory first:
 
 This matters for the `./data:/data` bind mount. If `data/` does not exist, Docker can create it as `root:root`, and the non-root container user will not be able to write uploaded jobs.
 
+Create a local `.env` file with the shared Bearer token:
+
+```bash
+API_BEARER_TOKEN=replace-with-a-long-random-token
+```
+
+Create or copy TLS files for Uvicorn:
+
+```text
+./secrets/tls/server.crt
+./secrets/tls/server.key
+```
+
+The certificate must be trusted by the C# backend host. In the current LAN deployment, Firebat trusts the local CA that signs this server certificate.
+
 Then start the service:
 
 ```bash
@@ -31,8 +46,10 @@ docker compose up --build
 The service listens on:
 
 ```text
-http://0.0.0.0:18081
+https://0.0.0.0:18081
 ```
+
+The service uses HTTPS when `TLS_CERT_FILE` and `TLS_KEY_FILE` are configured by Compose.
 
 Runtime task data is stored in:
 
@@ -40,7 +57,7 @@ Runtime task data is stored in:
 ./data/jobs/
 ```
 
-`data/` is intentionally ignored by git.
+`data/`, `secrets/`, and `.env` are intentionally ignored by git.
 
 If permissions are broken after moving or recreating the folder, run:
 
